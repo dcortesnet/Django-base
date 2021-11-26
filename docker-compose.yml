@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+
+  database:
+    restart: always
+    image: postgres:10
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+
+  web:
+    build: .
+    command: gunicorn django_base_project.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./:/code
+    expose:
+      - 8000
+    environment:
+      SECRET_KEY : 'x67%#af=j*blm-_m#m+y$$zv1qdpk&+k!ak8@c&m7!zja&0az2'
+      DATABASE_URL : 'postgres://postgres:postgres@db:5432/postgres'
+      ENV_NAME : 'release'
+    depends_on:
+      - database
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 8000:80
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
