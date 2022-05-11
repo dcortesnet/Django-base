@@ -45,7 +45,7 @@ A continuación se listarán todos los puntos necesarios para comenzar a desarro
 * Instalación vía requirements.txt:
 
 ```bash
-$ cd dashboard_bid_backend
+$ cd django_base
 $ python3 -m virtualenv env
 $ source env/bin/activate
 $ pip3 install -r requirements.txt
