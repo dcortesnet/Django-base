@@ -47,7 +47,7 @@ A continuación se listarán todos los puntos necesarios para comenzar a desarro
 ```bash
 $ cd django_base
 $ python3 -m virtualenv env
-$ source env/bin/activate
+$ source env/Scripts/activate
 $ pip3 install -r requirements.txt
 ```
 
